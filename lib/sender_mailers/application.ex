@@ -15,9 +15,10 @@ defmodule SenderMailers.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: SenderMailers.PubSub},
       # Start the Endpoint (http/https)
-      SenderMailersWeb.Endpoint
+      SenderMailersWeb.Endpoint,
       # Start a worker by calling: SenderMailers.Worker.start_link(arg)
       # {SenderMailers.Worker, arg}
+      {Oban, Application.fetch_env!(:sender_mailers, Oban)}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

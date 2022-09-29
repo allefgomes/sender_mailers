@@ -1,9 +1,10 @@
 defmodule SenderMailers.SenderMailers do
   def send do
-    Enum.to_list(1..1_000_000)
-    |> Enum.each(fn n ->
-      SenderMailers.Mailers.DefaultMailer.welcome("Person #{n}", "mail#{n}@mail.com")
-      |> SenderMailers.Mailer.deliver
+    1..1_559_426
+    |> Enum.chunk_every(100)
+    |> Enum.map(fn items ->
+      SenderMailers.Workers.Sender.new(%{ items: items })
+      |> Oban.insert!
     end)
   end
 end

@@ -8,7 +8,11 @@ config :sender_mailers, SenderMailers.Repo,
   database: "sender_mailers_dev",
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,
-  pool_size: 10
+  pool_size: 10,
+  queue_target: 10_000,
+  queue_interval: 10_000,
+  timeout: 10_000,
+  connect_timeout: 10_000
 
 # For development, we disable any cache and enable
 # debugging and code reloading.
